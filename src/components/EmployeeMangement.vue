@@ -1,5 +1,5 @@
 <template>
-  <div class="employee-dashboard container py-5">
+  <div class="container-xl py-5">
     <!-- DELETE MODAL -->
     <DeleteEmployee
       :show="showDeleteModal"
@@ -7,12 +7,15 @@
       @cancel="closeDeleteModal"
     />
 
-    <div class="dashboard-header mb-5 text-center">
-      <h1 class="display-5 fw-bold text-slate-900 mb-2">
-        Employee <span class="text-indigo-600">Management</span>
+    <div class="mb-5 text-center">
+      <span class="badge bg-primary px-3 py-2 rounded-pill mb-3 shadow-sm">Admin Dashboard</span>
+      <h1 class="display-5 fw-bold text-dark mb-2">
+        <i class="bi bi-people-fill text-primary"></i> Employee Management
       </h1>
-      <p class="text-slate-500">Streamline your workforce operations with ease</p>
+      <p class="text-muted lead">Streamline your workforce operations with ease</p>
     </div>
+
+
 
     <div class="row g-4">
       <div class="col-lg-4">
@@ -139,10 +142,5 @@ export default {
 </script>
 
 <style scoped>
-.employee-dashboard {
-  max-width: 1200px;
-}
-.text-indigo-600 { color: #4f46e5; }
-.text-slate-900 { color: #0f172a; }
-.text-slate-500 { color: #64748b; }
+/* Scoped styles removed in favor of global app.css and standard Bootstrap utilities */
 </style>

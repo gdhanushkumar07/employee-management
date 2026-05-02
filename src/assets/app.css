@@ -1,0 +1,83 @@
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* For fixed navbar */
+}
+
+body {
+  /* Subtle light gradient #f8f9fa to #eef2f7 */
+  background: linear-gradient(135deg, #f8f9fa 0%, #eef2f7 100%);
+  background-attachment: fixed;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #212529;
+  min-height: 100vh;
+}
+
+/* Typography hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Clean, white, rounded cards */
+.card {
+  border: none;
+  border-radius: 0.75rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.04), 0 0.5rem 1rem rgba(0, 0, 0, 0.02) !important;
+}
+
+.card-header {
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  background-color: transparent;
+}
+
+/* Form input refinements */
+.form-control:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+}
+
+/* Table refinements */
+.table th {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: #6c757d;
+  font-weight: 600;
+  border-bottom: 2px solid #e9ecef;
+}
+.table td {
+  vertical-align: middle;
+}
+
+/* Empty state styling */
+.empty-state-icon {
+  font-size: 3rem;
+  color: #ced4da;
+}
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(33, 37, 41, 0.4);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+}
+/* Navbar link hover effect */
+.navbar-nav .nav-link {
+  transition: all 0.3s ease;
+  border-radius: 0.5rem;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #0d6efd !important; /* Bootstrap primary color */
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.navbar-brand:hover {
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}

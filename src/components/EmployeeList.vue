@@ -1,60 +1,66 @@
 <template>
   <div class="card border-0 shadow-sm overflow-hidden">
-    <div class="card-header bg-white border-0 pt-4 px-4 pb-2 d-flex justify-content-between align-items-center">
-      <h5 class="fw-semibold mb-0">📋 Employee Directory</h5>
-      <span class="badge bg-indigo-50 text-indigo-600 px-3 py-2 rounded-pill">
+    <div class="card-header bg-info border-bottom-0 pt-4 px-4 pb-3 d-flex justify-content-between align-items-center rounded-top">
+      <h5 class="fw-bold text-white mb-0"><i class="bi bi-card-list text-white me-2"></i>Employee Directory</h5>
+      <span class="badge bg-light text-info rounded-pill px-3 py-2 shadow-sm">
         {{ employees.length }} Members
       </span>
     </div>
     <div class="card-body p-0">
       <div v-if="loading" class="text-center py-5">
-        <div class="spinner-loader"></div>
-        <p class="text-slate-400 mt-3 small">Loading records...</p>
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="text-muted mt-3 small">Loading records...</p>
       </div>
       <div v-else class="table-responsive">
-        <table class="table custom-table mb-0">
-          <thead>
+        <table class="table table-hover align-middle mb-0">
+          <thead class="bg-light text-muted">
             <tr>
-              <th class="ps-4">Employee</th>
-              <th>Role</th>
-              <th>Dept</th>
-              <th>Salary</th>
-              <th class="text-end pe-4">Actions</th>
+              <th class="ps-4 fw-semibold text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.05em;">Employee</th>
+              <th class="fw-semibold text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.05em;">Role</th>
+              <th class="fw-semibold text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.05em;">Dept</th>
+              <th class="fw-semibold text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.05em;">Salary</th>
+              <th class="text-end pe-4 fw-semibold text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.05em;">Actions</th>
             </tr>
           </thead>
           <tbody>
             <tr v-if="employees.length === 0">
               <td colspan="5" class="text-center py-5">
                 <div class="empty-state">
-                  <p class="text-slate-400 mb-0">No records found.</p>
+                  <i class="bi bi-inbox empty-state-icon mb-3 d-block"></i>
+                  <h6 class="text-muted mb-1">No employees found</h6>
+                  <p class="text-muted small mb-0">Get started by creating a new record.</p>
                 </div>
               </td>
             </tr>
-            <tr v-for="emp in employees" :key="emp.id" class="align-middle">
-              <td class="ps-4">
+            <tr v-for="emp in employees" :key="emp.id">
+              <td class="ps-4 py-3">
                 <div class="d-flex align-items-center">
-                  <div class="avatar me-3">{{ emp.name.charAt(0) }}</div>
-                  <div class="fw-semibold text-slate-700">{{ emp.name }}</div>
+                  <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3" style="width: 36px; height: 36px; font-weight: 600;">
+                    {{ emp.name.charAt(0) }}
+                  </div>
+                  <div class="fw-bold text-dark">{{ emp.name }}</div>
                 </div>
               </td>
-              <td><span class="text-slate-600">{{ emp.designation }}</span></td>
-              <td><span class="badge bg-slate-100 text-slate-600 fw-normal">{{ emp.department }}</span></td>
-              <td><span class="fw-medium">₹{{ Number(emp.salary).toLocaleString() }}</span></td>
-              <td class="text-end pe-4">
-                <div class="action-buttons">
+              <td class="py-3"><span class="text-secondary">{{ emp.designation }}</span></td>
+              <td class="py-3"><span class="badge bg-secondary bg-opacity-10 text-secondary border fw-normal">{{ emp.department }}</span></td>
+              <td class="py-3"><span class="fw-medium text-dark">₹{{ Number(emp.salary).toLocaleString() }}</span></td>
+              <td class="text-end pe-4 py-3">
+                <div class="btn-group shadow-sm" role="group">
                   <button
-                    class="btn btn-icon text-warning me-1"
+                    class="btn btn-sm btn-warning text-dark border-0"
                     @click="$emit('edit', emp)"
                     title="Edit"
                   >
-                    ✏️
+                    <i class="bi bi-pencil"></i>
                   </button>
                   <button
-                    class="btn btn-icon text-danger"
+                    class="btn btn-sm btn-danger border-0"
                     @click="$emit('delete', emp.id)"
                     title="Delete"
                   >
-                    🗑️
+                    <i class="bi bi-trash"></i>
                   </button>
                 </div>
               </td>
@@ -77,77 +83,5 @@ export default {
 </script>
 
 <style scoped>
-.text-indigo-600 { color: #4f46e5; }
-.text-slate-700 { color: #334155; }
-.text-slate-600 { color: #475569; }
-.text-slate-400 { color: #94a3b8; }
-.bg-indigo-50 { background-color: #eef2ff; }
-.bg-slate-100 { background-color: #f1f5f9; }
-
-/* Custom Table */
-.custom-table thead th {
-  background-color: #f8fafc;
-  color: #64748b;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 600;
-  border-bottom: 1px solid #f1f5f9;
-  padding: 1rem;
-}
-
-.custom-table tbody tr {
-  transition: background-color 0.2s ease;
-}
-
-.custom-table tbody tr:hover {
-  background-color: #f8fafc;
-}
-
-.custom-table td {
-  padding: 1.25rem 1rem;
-  border-bottom: 1px solid #f1f5f9;
-}
-
-/* Avatar */
-.avatar {
-  width: 36px;
-  height: 36px;
-  background-color: #818cf8;
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  font-size: 0.875rem;
-}
-
-.btn-icon {
-  background: none;
-  border: none;
-  padding: 0.4rem;
-  border-radius: 6px;
-  transition: background-color 0.2s;
-}
-
-.btn-icon:hover {
-  background-color: #f1f5f9;
-}
-
-/* Loader */
-.spinner-loader {
-  width: 40px;
-  height: 40px;
-  border: 3px solid #f1f5f9;
-  border-top: 3px solid #4f46e5;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin: 0 auto;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
+/* Scoped styles removed in favor of standard Bootstrap */
 </style>
