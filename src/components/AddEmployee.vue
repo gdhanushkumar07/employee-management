@@ -51,8 +51,16 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "AddEmployee",
+  props: {
+    apiUrl: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       form: {
@@ -64,13 +72,18 @@ export default {
     };
   },
   methods: {
-    handleSubmit() {
+    async handleSubmit() {
       if (!this.form.name || !this.form.designation || !this.form.department || !this.form.salary) {
         alert("Please fill in all fields.");
         return;
       }
-      this.$emit("add", { ...this.form });
-      this.resetForm();
+      try {
+        await axios.post(this.apiUrl, this.form);
+        this.$emit("employee-added");
+        this.resetForm();
+      } catch (error) {
+        console.error("Error adding employee:", error);
+      }
     },
     resetForm() {
       this.form = { name: "", designation: "", department: "", salary: "" };

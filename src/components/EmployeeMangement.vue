@@ -3,11 +3,11 @@
     <!-- DELETE MODAL -->
     <DeleteEmployee
       :show="showDeleteModal"
-      @confirm="executeDelete"
+      :apiUrl="apiUrl"
+      :employeeId="deleteId"
+      @employee-deleted="onEmployeeDeleted"
       @cancel="closeDeleteModal"
     />
-
-
 
     <div class="row g-4">
       <div class="col-lg-4">
@@ -15,16 +15,17 @@
         <UpdateEmployee
           v-if="isEditing"
           :employee="currentEmployee"
-          @update="handleUpdate"
+          :apiUrl="apiUrl"
+          @employee-updated="onEmployeeUpdated"
           @cancel="resetForm"
         />
-        <AddEmployee v-else @add="handleAdd" />
+        <AddEmployee v-else :apiUrl="apiUrl" @employee-added="refreshList" />
       </div>
 
       <div class="col-lg-8">
         <EmployeeList
-          :employees="employees"
-          :loading="loading"
+          ref="employeeList"
+          :apiUrl="apiUrl"
           @edit="handleEdit"
           @delete="confirmDelete"
         />
@@ -34,7 +35,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import AddEmployee from "./AddEmployee.vue";
 import UpdateEmployee from "./UpdateEmployee.vue";
 import DeleteEmployee from "./DeleteEmployee.vue";
@@ -51,8 +51,6 @@ export default {
   data() {
     return {
       apiUrl: "https://69e856172f51b534be5fead9.mockapi.io/api/employees",
-      employees: [],
-      loading: false,
       isEditing: false,
       editId: null,
       currentEmployee: null,
@@ -60,38 +58,16 @@ export default {
       deleteId: null,
     };
   },
-  mounted() {
-    this.fetchEmployees();
-  },
   methods: {
-    async fetchEmployees() {
-      this.loading = true;
-      try {
-        const response = await axios.get(this.apiUrl);
-        this.employees = response.data;
-      } catch (error) {
-        console.error("Error fetching employees:", error);
-      }
-      this.loading = false;
-    },
-
-    async handleAdd(formData) {
-      try {
-        await axios.post(this.apiUrl, formData);
-        this.fetchEmployees();
-      } catch (error) {
-        console.error("Error adding employee:", error);
+    refreshList() {
+      if (this.$refs.employeeList) {
+        this.$refs.employeeList.fetchEmployees();
       }
     },
 
-    async handleUpdate(formData) {
-      try {
-        await axios.put(`${this.apiUrl}/${this.editId}`, formData);
-        this.resetForm();
-        this.fetchEmployees();
-      } catch (error) {
-        console.error("Error updating employee:", error);
-      }
+    onEmployeeUpdated() {
+      this.resetForm();
+      this.refreshList();
     },
 
     handleEdit(emp) {
@@ -106,14 +82,9 @@ export default {
       this.showDeleteModal = true;
     },
 
-    async executeDelete() {
-      try {
-        await axios.delete(`${this.apiUrl}/${this.deleteId}`);
-        this.closeDeleteModal();
-        this.fetchEmployees();
-      } catch (error) {
-        console.error("Error deleting employee:", error);
-      }
+    onEmployeeDeleted() {
+      this.closeDeleteModal();
+      this.refreshList();
     },
 
     closeDeleteModal() {

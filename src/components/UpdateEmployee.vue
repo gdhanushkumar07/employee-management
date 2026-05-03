@@ -54,9 +54,15 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "UpdateEmployee",
   props: {
+    apiUrl: {
+      type: String,
+      required: true
+    },
     employee: {
       type: Object,
       required: true
@@ -76,12 +82,17 @@ export default {
     }
   },
   methods: {
-    handleSubmit() {
+    async handleSubmit() {
       if (!this.form.name || !this.form.designation || !this.form.department || !this.form.salary) {
         alert("Please fill in all fields.");
         return;
       }
-      this.$emit("update", { ...this.form });
+      try {
+        await axios.put(`${this.apiUrl}/${this.form.id}`, this.form);
+        this.$emit("employee-updated");
+      } catch (error) {
+        console.error("Error updating employee:", error);
+      }
     }
   }
 };
