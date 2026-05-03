@@ -10,7 +10,7 @@
     </header>
 
     <div class="container-xl">
-      <!-- Description Card -->
+      <!-- Description Card: Explains the project's purpose -->
       <div class="card border-0 shadow-sm rounded-3 mb-4">
         <div class="card-body p-4 text-center">
           <p
@@ -27,7 +27,7 @@
         </div>
       </div>
 
-      <!-- Main Content -->
+      <!-- Main Content: Where the CRUD components are rendered -->
       <main>
         <EmployeeMangement />
       </main>
