@@ -8,14 +8,10 @@
     />
 
     <div class="mb-5 text-center">
-      <span class="badge bg-primary px-3 py-2 rounded-pill mb-3 shadow-sm">Admin Dashboard</span>
       <h1 class="display-5 fw-bold text-dark mb-2">
         <i class="bi bi-people-fill text-primary"></i> Employee Management
       </h1>
-      <p class="text-muted lead">Streamline your workforce operations with ease</p>
     </div>
-
-
 
     <div class="row g-4">
       <div class="col-lg-4">
@@ -26,10 +22,7 @@
           @update="handleUpdate"
           @cancel="resetForm"
         />
-        <AddEmployee
-          v-else
-          @add="handleAdd"
-        />
+        <AddEmployee v-else @add="handleAdd" />
       </div>
 
       <div class="col-lg-8">
@@ -57,7 +50,7 @@ export default {
     AddEmployee,
     UpdateEmployee,
     DeleteEmployee,
-    EmployeeList
+    EmployeeList,
   },
   data() {
     return {
@@ -68,7 +61,7 @@ export default {
       editId: null,
       currentEmployee: null,
       showDeleteModal: false,
-      deleteId: null
+      deleteId: null,
     };
   },
   mounted() {
@@ -136,11 +129,9 @@ export default {
       this.isEditing = false;
       this.editId = null;
       this.currentEmployee = null;
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style scoped>
-/* Scoped styles removed in favor of global app.css and standard Bootstrap utilities */
-</style>
+<style scoped></style>
