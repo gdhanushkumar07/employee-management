@@ -2,7 +2,7 @@
   <div v-if="show" class="modal-overlay">
     <div class="card border-0 shadow-lg" style="width: 90%; max-width: 400px; border-radius: 1rem;">
       <div class="card-body p-4 text-center">
-        <i class="bi bi-exclamation-triangle-fill text-warning display-4 mb-3 d-block"></i>
+
         <h5 class="fw-bold text-dark mb-2">Delete Employee?</h5>
         <p class="text-muted small mb-4">
           Are you sure you want to remove this record? This action cannot be undone.
@@ -12,7 +12,7 @@
             Cancel
           </button>
           <button class="btn btn-danger px-4 fw-medium" @click="$emit('confirm')">
-            <i class="bi bi-trash me-1"></i> Delete
+            Delete
           </button>
         </div>
       </div>

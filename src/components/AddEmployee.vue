@@ -1,7 +1,7 @@
 <template>
   <div class="card border-0 shadow-sm sticky-top" style="top: 2rem">
     <div class="card-header bg-primary border-bottom-0 pt-4 px-4 pb-3 rounded-top">
-      <h5 class="fw-bold text-white mb-0"><i class="bi bi-person-plus text-white me-2"></i>New Employee</h5>
+      <h5 class="fw-bold text-white mb-0">New Employee</h5>
     </div>
     <div class="card-body p-4">
       <div class="mb-3">
@@ -43,7 +43,7 @@
       
       <div class="d-grid">
         <button class="btn btn-success py-2 fw-semibold" @click="handleSubmit">
-          <i class="bi bi-check-circle me-1"></i> Create Employee
+          Create Employee
         </button>
       </div>
     </div>

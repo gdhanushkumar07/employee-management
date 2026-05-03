@@ -1,8 +1,8 @@
 <template>
   <div class="card border-0 shadow-sm overflow-hidden">
-    <div class="card-header bg-info border-bottom-0 pt-4 px-4 pb-3 d-flex justify-content-between align-items-center rounded-top">
-      <h5 class="fw-bold text-white mb-0"><i class="bi bi-card-list text-white me-2"></i>Employee Directory</h5>
-      <span class="badge bg-light text-info rounded-pill px-3 py-2 shadow-sm">
+    <div class="card-header bg-primary border-bottom-0 pt-4 px-4 pb-3 d-flex justify-content-between align-items-center rounded-top">
+      <h5 class="fw-bold text-white mb-0">Employee Directory</h5>
+      <span class="badge bg-light text-primary rounded-pill px-3 py-2 shadow-sm">
         {{ employees.length }} Members
       </span>
     </div>
@@ -28,7 +28,7 @@
             <tr v-if="employees.length === 0">
               <td colspan="5" class="text-center py-5">
                 <div class="empty-state">
-                  <i class="bi bi-inbox empty-state-icon mb-3 d-block"></i>
+
                   <h6 class="text-muted mb-1">No employees found</h6>
                   <p class="text-muted small mb-0">Get started by creating a new record.</p>
                 </div>
@@ -53,14 +53,14 @@
                     @click="$emit('edit', emp)"
                     title="Edit"
                   >
-                    <i class="bi bi-pencil"></i>
+                    Edit
                   </button>
                   <button
                     class="btn btn-sm btn-danger border-0"
                     @click="$emit('delete', emp.id)"
                     title="Delete"
                   >
-                    <i class="bi bi-trash"></i>
+                    Delete
                   </button>
                 </div>
               </td>

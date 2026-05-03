@@ -1,5 +1,5 @@
 <template>
-  <div class="container-xl py-5">
+  <div>
     <!-- DELETE MODAL -->
     <DeleteEmployee
       :show="showDeleteModal"
@@ -7,11 +7,7 @@
       @cancel="closeDeleteModal"
     />
 
-    <div class="mb-5 text-center">
-      <h1 class="display-5 fw-bold text-dark mb-2">
-        <i class="bi bi-people-fill text-primary"></i> Employee Management
-      </h1>
-    </div>
+
 
     <div class="row g-4">
       <div class="col-lg-4">
